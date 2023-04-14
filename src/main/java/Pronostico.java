@@ -8,11 +8,11 @@ public class Pronostico {
     private ResultadoEnum resultadoEnum;
     private int puntos=0;
 
-    public Pronostico(Partido partido, Equipo equipo1,String ganaA,String empate,String ganaB,Equipo equipo2) {
+    public Pronostico(Partido partido, Equipo equipo1,Boolean ganaA,Boolean empate,Boolean ganaB,Equipo equipo2) {
       this.partido = partido;
-      if (ganaB.equals(" ")) {
+      if (ganaB.equals(false)) {
           this.equipo  =equipo1;
-            if (ganaA.equals(" ")) {
+            if (ganaA.equals(false)) {
                 this.resultadoEnum = ResultadoEnum.empate;
             }else {this.resultadoEnum = ResultadoEnum.ganador;}
         }else{
