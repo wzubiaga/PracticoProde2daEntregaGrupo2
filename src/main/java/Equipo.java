@@ -12,7 +12,6 @@ public class Equipo {
     public int getID() {return id;}
     public String getNombre() { return nombre; }
     public String getDescripcion() {return descripcion; }
-
     public boolean equals(Equipo e) {
         if ((e.getID()==this.getID())&&(e.getNombre()==this.getNombre())&&(e.getDescripcion()==this.getDescripcion())) return true;
         return  false;

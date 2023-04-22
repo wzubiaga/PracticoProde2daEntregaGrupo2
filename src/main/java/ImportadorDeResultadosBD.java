@@ -1,8 +1,31 @@
 import java.sql.*;
 import java.util.Objects;
 
-
 public class ImportadorDeResultadosBD {
+
+    public static Liga GetEquiposParticipantes(){
+        Liga l = new Liga();
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/prode", "root", "");
+            Statement st = conn.createStatement();
+            ResultSet rs =  st.executeQuery("select * from equipo");
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String nombre = rs.getString("nombre");
+                String descripcion = rs.getString("descripcion");
+
+                Equipo nuevoEquipo = new Equipo(id, nombre, descripcion);
+                l.agregarEquipo(nuevoEquipo);
+            }
+            rs.close();
+            conn.close();
+            return l;
+        } catch(Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
+    }
 
     public static Torneo GetResultadosFromBD(Liga equiposParticipantes){
         Torneo t = new Torneo();
@@ -33,8 +56,8 @@ public class ImportadorDeResultadosBD {
             conn.close();
             return  t;
         }
-        catch(Exception e){
-            System.out.println(e);
+        catch(Exception ex){
+            ex.printStackTrace();
             return null;
         }
     }
@@ -59,7 +82,7 @@ public class ImportadorDeResultadosBD {
                 if (Objects.equals(partido, null)) {
                     rs.close();
                     conn.close();
-                   return null;
+                    return null;
                 }
                 Pronostico nuevo = new Pronostico(partido, equiposParticipantes.getEquipoParticipante(A), ganaA, empate, ganaB, equiposParticipantes.getEquipoParticipante(B));
 
@@ -70,14 +93,14 @@ public class ImportadorDeResultadosBD {
                     jugador = new Participante(j, dni);
                     jugador.agregarPronostico(nuevo);
                     juego.agregarParticipante(jugador);
-                    }
+                }
             }
             rs.close();
             conn.close();
             return juego;
         }
-        catch(Exception e) {
-            System.out.println(e);
+        catch(Exception ex) {
+            ex.printStackTrace();
             return null;
         }
     }

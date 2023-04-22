@@ -1,4 +1,20 @@
 ﻿SET FOREIGN_KEY_CHECKS=0;
+-- ----------------------------
+-- Table structure for equipo
+-- ----------------------------
+CREATE TABLE `equipo` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `nombre` varchar(110) NOT NULL,
+  `descripcion` varchar(110) NOT NULL,
+   PRIMARY KEY  (`id`)
+  ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+-- ----------------------------
+-- Records
+-- ----------------------------
+INSERT INTO `equipo` VALUES ('1', 'Argentina', 'Argentina');
+INSERT INTO `equipo` VALUES ('2', 'Arabia Saudita', 'Arabia Saudita');
+INSERT INTO `equipo` VALUES ('3', 'Polonia', 'Polonia');
+INSERT INTO `equipo` VALUES ('4', 'México', 'México');
 
 -- ----------------------------
 -- Table structure for torneo

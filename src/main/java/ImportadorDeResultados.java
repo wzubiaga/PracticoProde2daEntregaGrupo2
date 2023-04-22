@@ -5,6 +5,28 @@ import java.util.*;
 
 public class ImportadorDeResultados {
 
+    public static Liga GetEquiposParticipantes(String fileName)throws IOException {
+        Liga l = new Liga();
+        try {
+            Path archivoEquipos = Paths.get(fileName);
+            Scanner lector = new Scanner(archivoEquipos);
+            lector.useLocale(Locale.forLanguageTag("es-AR"));
+            lector.useDelimiter("[;\r\n]+");
+            while (lector.hasNext()) {
+                int id = lector.nextInt();
+                String nombre = lector.next();
+                String descripcion = lector.next();
+                Equipo nuevoEquipo = new Equipo(id, nombre, descripcion);
+                l.agregarEquipo(nuevoEquipo);
+            }
+            lector.close();
+            return l;
+        } catch (InputMismatchException e) {
+            System.out.println("Error en el formato del archivo equipos.csv");
+            return null;
+        }
+    }
+
     public static Torneo GetResultadosFromFile(String fileName, Liga equiposParticipantes)throws IOException {
         Torneo t = new Torneo();
         try {
@@ -64,7 +86,7 @@ public class ImportadorDeResultados {
                     return null;
                 }
 
-                Pronostico nuevo = new Pronostico(partido, equiposParticipantes.getEquipoParticipante(A), (ganaA == "x"), (empate == "x"), (ganaB == "x"), equiposParticipantes.getEquipoParticipante(B));
+                Pronostico nuevo = new Pronostico(partido, equiposParticipantes.getEquipoParticipante(A), (ganaA.equals("x")), (empate.equals("x")), (ganaB.equals("x")), equiposParticipantes.getEquipoParticipante(B));
                 Participante jugador = juego.existeParticipante(j, dni);
                 if (jugador != null) {
                     jugador.agregarPronostico(nuevo);

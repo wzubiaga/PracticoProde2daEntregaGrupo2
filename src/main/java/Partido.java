@@ -33,9 +33,8 @@ public class Partido {
                 golesB=this.golesEquipo1;
                 golesA=this.golesEquipo2;
             }
-            //else
-              //  System.out.println("El Equipo ingresado no jugo en este partido");
-                 
+            else
+                System.out.println("El Equipo ingresado no jugo en este partido.");
 
         if (golesA > golesB)
             return  ResultadoEnum.ganador;
@@ -47,9 +46,10 @@ public class Partido {
                     return ResultadoEnum.empate;
 
    }
+
     public String imprimirResultado(){
-       //return "Equipo1:"+ equipo1.nombre()+"["+golesEquipo1+"]"+" VS Equipo2:"+ equipo2.nombre()+"["+golesEquipo2+"]";
-       return equipo1.getNombre()+"["+golesEquipo1+"]"+" VS. "+ equipo2.getNombre()+"["+golesEquipo2+"]";
+        return  String.format("| %-15s [ %d ] %s [ %d ] %-15s |",
+                equipo1.getNombre(),  golesEquipo1, "Vs.", golesEquipo2,equipo2.getNombre());
     }
 
 }

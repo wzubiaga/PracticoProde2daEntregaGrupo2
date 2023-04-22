@@ -2,7 +2,6 @@
 import java.util.ArrayList;
 
 public class Ronda {
-
     private int nro;
     private ArrayList<Partido> listaPartidos;
 
@@ -36,5 +35,14 @@ public class Ronda {
             resultado += (p.imprimirResultado()+ "\n");
         }
     return resultado;
+    }
+
+    public boolean aciertaRonda(Participante p){
+        for (Partido partidoEnRonda :listaPartidos){
+           if (p.exitePartido(partidoEnRonda).getPuntos()!=Pronostico.PuntosPorAcierto){
+               return false;
+           }
+        }
+        return true;
     }
 }

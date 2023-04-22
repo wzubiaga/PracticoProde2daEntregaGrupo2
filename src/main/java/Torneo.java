@@ -5,16 +5,12 @@ public class Torneo {
 
     private ArrayList<Ronda> campeonato;
 
-
-   // public Torneo(ArrayList<Ronda> campeonato) {        this.campeonato = campeonato;    }
-
     public Torneo(){
         this.campeonato = new ArrayList<>();
     }
     public boolean isEmpty(){
         return (this.campeonato.size()==0);
     }
-
     public String imprimirResultado(){
         String resultado = "";
         for (Ronda r : campeonato) {
@@ -22,7 +18,6 @@ public class Torneo {
         }
     return  resultado;
     }
-
     public Ronda existeRonda (int nroRonda){
         for (Ronda r : campeonato) {
           if (r.getNro()==nroRonda)
@@ -42,4 +37,17 @@ public class Torneo {
         }
         return  null;
     }
+    public Boolean aciertaFase(Participante p){
+        for (Ronda r : campeonato) {
+            if (r.aciertaRonda(p)==false){
+                return false;
+            }
+        }
+        return  true;
+    }
+    public ArrayList<Ronda> getCampeonato(){
+        return  this.campeonato;
+    }
+
 }
+

@@ -18,7 +18,7 @@ public class Pronostico {
         }else{
             this.equipo = equipo2;
             this.resultadoEnum = ResultadoEnum.ganador;
-      };
+        }
         int valor = partido.getGolesEquipo1()- partido.getGolesEquipo2();
         if (valor >0) {
             //gano equipo1
@@ -41,15 +41,14 @@ public class Pronostico {
         }
     }
 
+    public Partido getPartido(){
+        return partido;
+    }
+
     public Equipo getEquipo() { return equipo; }
 
     public ResultadoEnum getResultadoEnum() { return resultadoEnum; }
 
     public int getPuntos() { return puntos; }
-
-    public String imprimirResultado(){
-        //return "Equipo1:"+ equipo1.nombre()+"["+golesEquipo1+"]"+" VS Equipo2:"+ equipo2.nombre()+"["+golesEquipo2+"]";
-        return equipo.getNombre()+"["+resultadoEnum+"]";
-    }
 
 }
