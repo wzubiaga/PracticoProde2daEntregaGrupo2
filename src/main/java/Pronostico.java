@@ -2,14 +2,12 @@
 //en esta clase el jugador toma a un equipo y apuesta si gana o empata
 //la apuesta pierde el equipaA se toma como apuesta gana equipoB
 public class Pronostico {
-    private  int PuntosPorAcierto;
     private Partido partido;
     private Equipo equipo;
     private ResultadoEnum resultadoEnum;
     private int puntos=0;
 
     public Pronostico(Partido partido, Equipo equipo1,Boolean ganaA,Boolean empate,Boolean ganaB,Equipo equipo2,int PuntosPorAcierto) {
-      this.PuntosPorAcierto = PuntosPorAcierto;
       this.partido = partido;
       if (ganaB.equals(false)) {
           this.equipo  =equipo1;
@@ -51,7 +49,5 @@ public class Pronostico {
     public ResultadoEnum getResultadoEnum() { return resultadoEnum; }
 
     public int getPuntos() { return puntos; }
-
-    public int PuntosPorAcierto(){return PuntosPorAcierto;}
 
 }
