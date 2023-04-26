@@ -64,7 +64,7 @@ public class ImportadorDeResultados {
     }
 
     public static Prode GetPronosticoFromFile(String fileName, Liga equiposParticipantes, Torneo t)throws IOException {
-        Prode juego = new Prode();
+        Prode juego = new Prode(1,2,2);
         try {
             Path archivoPronostico = Paths.get(fileName);
             Scanner lector = new Scanner(archivoPronostico);
@@ -86,7 +86,7 @@ public class ImportadorDeResultados {
                     return null;
                 }
 
-                Pronostico nuevo = new Pronostico(partido, equiposParticipantes.getEquipoParticipante(A), (ganaA.equals("x")), (empate.equals("x")), (ganaB.equals("x")), equiposParticipantes.getEquipoParticipante(B));
+                Pronostico nuevo = new Pronostico(partido, equiposParticipantes.getEquipoParticipante(A), (ganaA.equals("x")), (empate.equals("x")), (ganaB.equals("x")), equiposParticipantes.getEquipoParticipante(B),juego.GetPuntosPorAciertoPronostico());
                 Participante jugador = juego.existeParticipante(j, dni);
                 if (jugador != null) {
                     jugador.agregarPronostico(nuevo);

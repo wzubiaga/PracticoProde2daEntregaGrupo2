@@ -63,12 +63,24 @@ public class ImportadorDeResultadosBD {
     }
 
     public static Prode GetPronosticoFromBD(Liga equiposParticipantes, Torneo t) {
-        Prode juego = new Prode();
+        Prode juego;
+        int PuntosPorAciertoPronostico=0;
+        int PuntosPorAciertoRonda=0;
+        int PuntosPorAciertoFase=0;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/prode", "root", "");
             Statement st = conn.createStatement();
-            ResultSet rs =  st.executeQuery("select * from pronostico");
+
+            ResultSet rs =  st.executeQuery("select * from configuracionpuntajes");
+            while (rs.next()) {
+                PuntosPorAciertoPronostico =  rs.getInt("puntosPorAciertoPronostico");
+                PuntosPorAciertoRonda =  rs.getInt("puntosPorAciertoRonda");
+                PuntosPorAciertoFase =  rs.getInt("puntosPorAciertoFase");
+            }
+            juego = new Prode(PuntosPorAciertoPronostico,PuntosPorAciertoRonda,PuntosPorAciertoFase );
+
+            rs =  st.executeQuery("select * from pronostico");
             while (rs.next()) {
                 String j = rs.getString("apellidoYNombreParticipante");
                 int dni =  rs.getInt("dniParticipante");
@@ -84,7 +96,7 @@ public class ImportadorDeResultadosBD {
                     conn.close();
                     return null;
                 }
-                Pronostico nuevo = new Pronostico(partido, equiposParticipantes.getEquipoParticipante(A), ganaA, empate, ganaB, equiposParticipantes.getEquipoParticipante(B));
+                Pronostico nuevo = new Pronostico(partido, equiposParticipantes.getEquipoParticipante(A), ganaA, empate, ganaB, equiposParticipantes.getEquipoParticipante(B),1);
 
                 Participante jugador = juego.existeParticipante(j, dni);
                 if (jugador != null) {

@@ -61,3 +61,18 @@ INSERT INTO `pronostico` VALUES ('5', 'Pedro', '4434538', 'Argentina', '1', '0',
 INSERT INTO `pronostico` VALUES ('6', 'Pedro', '4434538', 'Polonia', '0', '0', '1', 'México');
 INSERT INTO `pronostico` VALUES ('7', 'Pedro', '4434538', 'Argentina', '1', '0', '0', 'México');
 INSERT INTO `pronostico` VALUES ('8', 'Pedro', '4434538', 'Arabia Saudita', '0', '1', '0', 'Polonia');
+
+-- ----------------------------
+-- Table structure for configuracionpuntajes
+-- ----------------------------
+CREATE TABLE `configuracionpuntajes` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `puntosPorAciertoPronostico` int(10) unsigned NOT NULL,
+  `puntosPorAciertoRonda` int(10) unsigned NOT NULL,
+  `puntosPorAciertoFase` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+-- ----------------------------
+-- Records
+-- ----------------------------
+INSERT INTO `configuracionpuntajes` VALUES ('1', '1', '2', '2');

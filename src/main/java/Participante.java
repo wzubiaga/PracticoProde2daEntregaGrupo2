@@ -3,8 +3,6 @@ import java.util.ArrayList;
 
 public class Participante {
 
-    static final int PuntosPorAciertoRonda = 2;
-    static final int PuntosPorAciertoFase = 2;
 
     private String apellidoYNombre;
     private int documento;
@@ -34,17 +32,17 @@ public class Participante {
 
     public int puntosObtenidos(Torneo t){
         int acumular = 0;
-        int valor = 0;
+        int valor;
         for(Pronostico p : pronosticosJugador){
             valor   = p.getPuntos();
             acumular += valor;
         }
-        return acumular+puntosExtraPorRonda(t)+puntosExtraPorFase(t);
+        return acumular; //+puntosExtraPorRonda(t)+puntosExtraPorFase(t);
     }
-    public int pronosticosAcertados(){
+    public int pronosticosAcertados(int PuntosPorAciertoPronostico){
         int acumular = 0;
         for(Pronostico p : pronosticosJugador){
-            if (p.getPuntos()==p.PuntosPorAcierto)
+            if (p.getPuntos()==PuntosPorAciertoPronostico)
                 acumular += 1;
         }
         return acumular;
@@ -59,20 +57,20 @@ public class Participante {
     }
 
     //● Se suman puntos extra cuando se aciertan todos los resultados de una ronda
-    public int puntosExtraPorRonda(Torneo t){
+    public int puntosExtraPorRonda(Torneo t,int PuntosPorAciertoRonda, int PuntosPorAcierto ){
         int valor = 0;
         for (Ronda ron : t.getCampeonato()){
-            if (ron.aciertaRonda(this))
+            if (ron.aciertaRonda(this , PuntosPorAcierto))
                 valor += PuntosPorAciertoRonda;
        }
         return valor;
     }
 
     //● Se suman puntos extra cuando se aciertan todos los resultados de una fase
-    public int puntosExtraPorFase(Torneo t){
+    public int puntosExtraPorFase(Torneo t,int PuntosPorAciertoFase, int PuntosPorAcierto){
         int valor = 0;
-        if (t.aciertaFase(this))
-                valor =+ PuntosPorAciertoFase;
+        if (t.aciertaFase(this,PuntosPorAcierto))
+                valor = PuntosPorAciertoFase;
         return valor;
     }
 

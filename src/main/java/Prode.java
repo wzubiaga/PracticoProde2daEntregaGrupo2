@@ -2,9 +2,17 @@
 import java.util.ArrayList;
 
 public class Prode {
+    private int PuntosPorAciertoRonda;
+    private int PuntosPorAciertoFase;
+    private int PuntosPorAciertoPronostico;
+
     private ArrayList<Participante> listaParticipantes;
 
-    public Prode() {
+    public Prode(int PuntosPorAciertoPronostico,int PuntosPorAciertoRonda,int PuntosPorAciertoFase) {
+        this.PuntosPorAciertoPronostico = PuntosPorAciertoPronostico;
+        this.PuntosPorAciertoRonda = PuntosPorAciertoRonda;
+        this.PuntosPorAciertoFase = PuntosPorAciertoFase;
+
         this.listaParticipantes = new ArrayList<>();
     }
 
@@ -25,30 +33,53 @@ public class Prode {
         return (this.listaParticipantes.size()==0);
     }
 
-    //Imprime por pantalla el nombre de cada persona, el puntaje total y la cantidad dep ronósticos acertados.
+    public int GetPuntosPorAciertoPronostico(){return PuntosPorAciertoPronostico;}
+
+    //Imprime por pantalla el nombre de cada persona, el puntaje total y la cantidad de pronósticos acertados.
     public String imprimirResultados(Torneo t){
-        String resultado = "| Participante | Cant. Pronósticos Acertados | Puntos Extra Ronda | Puntos Extra Fase | Puntaje Total | \n";
+        StringBuilder resultado = new StringBuilder("| Participante | Cant. Pronósticos Acertados | Puntos Extra Ronda | Puntos Extra Fase | Puntaje Total | \n");
         for(Participante p : listaParticipantes){
-            resultado +=  String.format("| %-12s | %-27d | %-18d | %-17d | %-13d | \n",
-                          p.getApellidoYNombre(),p.pronosticosAcertados(),p.puntosExtraPorRonda(t),p.puntosExtraPorFase(t),p.puntosObtenidos(t) );
+            resultado.append(String.format("| %-12s | %-27d | %-18d | %-17d | %-13d | \n",
+                    p.getApellidoYNombre(),
+                    p.pronosticosAcertados(PuntosPorAciertoPronostico),
+                    p.puntosExtraPorRonda(t,PuntosPorAciertoRonda,PuntosPorAciertoPronostico),
+                    p.puntosExtraPorFase(t,PuntosPorAciertoFase,PuntosPorAciertoPronostico),
+                    (p.puntosObtenidos(t)+p.puntosExtraPorRonda(t,PuntosPorAciertoRonda,PuntosPorAciertoPronostico))+p.puntosExtraPorFase(t,PuntosPorAciertoFase,PuntosPorAciertoPronostico)));
         }
-        return  resultado;
+        return resultado.toString();
     }
 
-    public String ImprimirGanadores(Torneo t){
+    //Imprime por pantalla al primer ganador que encuentra en la lista de participantes
+    public String ImprimirGanador(Torneo t){
+        StringBuilder resultado = new StringBuilder("| Nombre y Apellido | Documento | Puntos Obtenidos | \n");
         Participante mayor = null;
         for(Participante p : listaParticipantes){
-            if (mayor==null || p.puntosObtenidos(t)> mayor.puntosObtenidos(t)) {
-            mayor=p;
-            }
+            if (mayor==null || p.puntosObtenidos(t)> mayor.puntosObtenidos(t)) mayor=p;
         }
-        String resultado = "| Nombre y Apellido | Documento | Puntos Obtenidos | \n";
-        for(Participante p : listaParticipantes){
-            if (p.puntosObtenidos(t) == mayor.puntosObtenidos(t)) {
-                resultado +=  String.format("| %-17s | %-9d | %-16d |\n",
-                              p.getApellidoYNombre(),p.getDocumento(),p.puntosObtenidos(t));
-            }
+        if (mayor!=null) {
+            resultado.append(String.format("| %-17s | %-9d | %-16d |\n",
+                mayor.getApellidoYNombre(), mayor.getDocumento(), mayor.puntosObtenidos(t)));
         }
-        return resultado;
+
+        return resultado.toString();
     }
+
+    //Imprime por pantalla TODOS los ganadores que encuentra en la lista de participantes
+    public String ImprimirGanadores(Torneo t){
+        StringBuilder resultado = new StringBuilder("| Nombre y Apellido | Documento | Puntos Obtenidos | \n");
+        Participante mayor = null;
+        for(Participante p : listaParticipantes){
+            if (mayor==null || p.puntosObtenidos(t)> mayor.puntosObtenidos(t)) mayor=p;
+        }
+        if (mayor!=null) {
+            for (Participante p : listaParticipantes) {
+                if (p.puntosObtenidos(t) == mayor.puntosObtenidos(t)) {
+                    resultado.append(String.format("| %-17s | %-9d | %-16d |\n",
+                            p.getApellidoYNombre(), p.getDocumento(), p.puntosObtenidos(t)));
+                }
+            }
+        }
+        return resultado.toString();
+    }
+
 }

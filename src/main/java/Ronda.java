@@ -26,20 +26,20 @@ public class Ronda {
             }
         return  null;
     }
- public void agregarPartido(Partido p){
+    public void agregarPartido(Partido p){
         this.listaPartidos.add(p);
  }
     public String imprimirResultado(){
-        String resultado = "";
+        StringBuilder resultado = new StringBuilder();
         for (Partido p : listaPartidos) {
-            resultado += (p.imprimirResultado()+ "\n");
+            resultado.append(p.imprimirResultado()).append("\n");
         }
-    return resultado;
+    return resultado.toString();
     }
 
-    public boolean aciertaRonda(Participante p){
+    public boolean aciertaRonda(Participante p, int PuntosPorAciertoPronostico){
         for (Partido partidoEnRonda :listaPartidos){
-           if (p.exitePartido(partidoEnRonda).getPuntos()!=Pronostico.PuntosPorAcierto){
+           if (p.exitePartido(partidoEnRonda).getPuntos()!=PuntosPorAciertoPronostico){
                return false;
            }
         }

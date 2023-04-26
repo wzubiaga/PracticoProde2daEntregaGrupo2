@@ -6,9 +6,11 @@ public class Liga {
     public Liga() {
         equiposParticipantes = new HashMap<>();
     }
+
     public void agregarEquipo(Equipo e) {
         equiposParticipantes.put(e.getNombre(), e);
     }
+
     public Equipo getEquipoParticipante(String nombre){
         return equiposParticipantes.get(nombre);
     }

@@ -12,11 +12,11 @@ public class Torneo {
         return (this.campeonato.size()==0);
     }
     public String imprimirResultado(){
-        String resultado = "";
+        StringBuilder resultado = new StringBuilder();
         for (Ronda r : campeonato) {
-            resultado += "Ronda Nro: "+ r.getNro()+ "\n" +r.imprimirResultado() + "\n";
+            resultado.append("Ronda Nro: ").append(r.getNro()).append("\n").append(r.imprimirResultado()).append("\n");
         }
-    return  resultado;
+    return resultado.toString();
     }
     public Ronda existeRonda (int nroRonda){
         for (Ronda r : campeonato) {
@@ -37,9 +37,9 @@ public class Torneo {
         }
         return  null;
     }
-    public Boolean aciertaFase(Participante p){
+    public Boolean aciertaFase(Participante p, int PuntosPorAcierto){
         for (Ronda r : campeonato) {
-            if (r.aciertaRonda(p)==false){
+            if (r.aciertaRonda(p,PuntosPorAcierto)==false){
                 return false;
             }
         }

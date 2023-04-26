@@ -1,7 +1,7 @@
 public class Partido {
     private int id;
     private Equipo equipo1;
-    private  Equipo equipo2;
+    private Equipo equipo2;
     private int golesEquipo1;
     private int golesEquipo2;
 
@@ -9,8 +9,8 @@ public class Partido {
         this.id = id;
         this.golesEquipo1 = golesA;
         this.golesEquipo2 = golesB;
-        equipo1 = a;
-        equipo2 = b;
+        this.equipo1 = a;
+        this.equipo2 = b;
     }
     public int getId(){return id;}
     public Equipo getEquipo1(){return equipo1;}
@@ -18,31 +18,28 @@ public class Partido {
     public  int getGolesEquipo1(){return golesEquipo1;}
     public  int getGolesEquipo2(){return golesEquipo2;}
 
-    public ResultadoEnum Resultado (Equipo a){
-        Equipo b;
-        int golesA = 0;
-        int golesB = 0;
-        if (a.equals(this.equipo1)){
-            b=this.equipo2;
-            golesB=this.golesEquipo2;
-            golesA=this.golesEquipo1;
+    public ResultadoEnum Resultado (Equipo equipoApostado){
+        int golesEquipoApostado = 0;
+        int golesEquipoRival = 0;
+        if (equipoApostado.equals(this.equipo1)){
+            golesEquipoApostado=this.golesEquipo1;
+            golesEquipoRival=this.golesEquipo2;
             }
         else
-            if (a.equals(equipo2)){
-                b=this.equipo1;
-                golesB=this.golesEquipo1;
-                golesA=this.golesEquipo2;
+            if (equipoApostado.equals(equipo2)){
+                golesEquipoRival=this.golesEquipo1;
+                golesEquipoApostado=this.golesEquipo2;
             }
             else
                 System.out.println("El Equipo ingresado no jugo en este partido.");
 
-        if (golesA > golesB)
+        if (golesEquipoApostado > golesEquipoRival)
             return  ResultadoEnum.ganador;
             else
-                if (golesA < golesB)
+                if (golesEquipoApostado < golesEquipoRival)
                     return ResultadoEnum.perdedor;
                 else
-                    // (golesA = golesB)
+                    // (golesEquipoApostado = golesEquipoRival)
                     return ResultadoEnum.empate;
 
    }

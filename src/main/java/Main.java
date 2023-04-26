@@ -22,7 +22,8 @@ public class Main {
            System.out.println("No se encontraron Pronosticos.");
        } else {
            System.out.println("Pronosticos de los Participantes:" + "\n" + importarProde.imprimirResultados(torneo));
-           System.out.println("El Ganador: " + "\n" + importarProde.ImprimirGanadores(torneo));
+           System.out.println("El Ganador: " + "\n" + importarProde.ImprimirGanador(torneo));
+           //System.out.println("El Ganador: " + "\n" + importarProde.ImprimirGanadores(torneo));
        }
     }
 }
