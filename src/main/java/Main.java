@@ -4,7 +4,7 @@ public class Main {
         //Liga equiposParticipantes = ImportadorDeResultados.GetEquiposParticipantes("src/main/resources/equipos.csv");
         Liga equiposParticipantes = ImportadorDeResultadosBD.GetEquiposParticipantes();
 
-       //Torneo importarR = ImportadorDeResultados.GetResultadosFromFile("src/main/resources/resultados.csv", equiposParticipantes);
+       //Torneo torneo = ImportadorDeResultados.GetResultadosFromFile("src/main/resources/resultados.csv", equiposParticipantes);
         Torneo torneo = ImportadorDeResultadosBD.GetResultadosFromBD(equiposParticipantes);
 
        if (torneo == null) return;
