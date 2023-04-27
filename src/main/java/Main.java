@@ -1,8 +1,10 @@
-public class Main {
-    public static void main(String[] args) {
+import java.io.IOException;
 
-        //Liga equiposParticipantes = ImportadorDeResultados.GetEquiposParticipantes("src/main/resources/equipos.csv");
-        Liga equiposParticipantes = ImportadorDeResultadosBD.GetEquiposParticipantes();
+public class Main {
+    public static void main(String[] args) throws IOException {
+
+        Liga equiposParticipantes = ImportadorDeResultados.GetEquiposParticipantes("src/main/resources/equipos.csv");
+        //Liga equiposParticipantes = ImportadorDeResultadosBD.GetEquiposParticipantes();
 
        //Torneo torneo = ImportadorDeResultados.GetResultadosFromFile("src/main/resources/resultados.csv", equiposParticipantes);
         Torneo torneo = ImportadorDeResultadosBD.GetResultadosFromBD(equiposParticipantes);
@@ -15,7 +17,7 @@ public class Main {
            System.out.println("----------------------");
        }
 
-    // Prode importarProde = ImportadorDeResultados.GetPronosticoFromFile("src/main/resources/pronostico.csv", equiposParticipantes, importarR);
+    // Prode importarProde = ImportadorDeResultados.GetPronosticoFromFile("src/main/resources/pronostico.csv", equiposParticipantes, torneo);
        Prode importarProde = ImportadorDeResultadosBD.GetPronosticoFromBD( equiposParticipantes, torneo);
        if (importarProde == null) return;
        if (importarProde.isEmpty()) {
